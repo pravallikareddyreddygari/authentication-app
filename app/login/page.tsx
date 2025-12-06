@@ -49,7 +49,10 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="text-3xl font-bold mb-4">
+        Welcome to the Authentication App!
+      </h1>
       <form
         onSubmit={onSubmit}
         className="w-full max-w-md p-8 border-2 border-gray-300 rounded-2xl shadow-2xl"
