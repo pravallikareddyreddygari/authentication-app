@@ -2,7 +2,8 @@
 
 import { FormEvent, useEffect } from "react";
 
-import useValidation from "../useValidation";
+import Link from "next/link";
+import useValidation from "../hooks/useValidation";
 
 export default function Login() {
   const {
@@ -34,7 +35,7 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <form
         onSubmit={onSubmit}
         className="w-full max-w-md p-8 border-2 border-gray-300 rounded-2xl shadow-2xl"
@@ -78,9 +79,9 @@ export default function Login() {
 
         <p className="text-sm mt-4 text-center">
           Don`t have an account?{" "}
-          <a className="text-blue-600 underline" href="/signup">
+          <Link className="text-blue-600 underline" href="/">
             Sign up
-          </a>
+          </Link>
         </p>
       </form>
     </div>
