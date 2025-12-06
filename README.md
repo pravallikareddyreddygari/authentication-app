@@ -1,22 +1,39 @@
-## Getting Started
 
-1. Install node modules
+========
 
-```bash
+## Run app
+
+mkdir C:\code\
+cd C:\code\
+
+git clone  https://github.com/reddygaripravallikareddy/authentication-app.git
+cd C:\code\authentication-app\
+
 npm i
-```
-
-2. Run the development server:
-
-```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-3. Open  http://localhost:3000 with your browser to see the result.
+// go to http://localhost:3000/login
 
+========
+
+## Make changes
+
+
+cd C:\code\authentication-app\
+code .
+
+// do changes
+
+// **ONE TIME ONLY - BEGIN**
+git config --local user.name "reddygaripravallikareddy"
+git config --local user.email "reddygaripravallikareddy@gmail.com"
+// **ONE TIME ONLY - END**
+
+git add *
+git commit -m "update readme"
+
+git pull
+git push
+
+
+========
