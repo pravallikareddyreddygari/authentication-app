@@ -1,7 +1,8 @@
 "use client";
-import { useState} from "react";
 
-export default function LoginPage() {
+import { useState } from "react";
+
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -13,7 +14,7 @@ export default function LoginPage() {
   const onSubmit = () => {
     if (!validateEmail(email)) {
       setError("Please enter a valid email address.");
-    return;
+      return;
     }
     if (password.length < 8) {
       setError("Password must be at least 8 characters.");
@@ -52,9 +53,7 @@ export default function LoginPage() {
           className="w-full p-2 mb-4 border rounded"
         />
 
-        <button type="submit">
-          Login
-        </button>
+        <button type="submit">Login</button>
 
         <p className="text-sm mt-4 text-center">
           Don’t have an account?{" "}
@@ -63,6 +62,6 @@ export default function LoginPage() {
           </a>
         </p>
       </form>
-    </div>
-  );
+    </div>
+  );
 }
