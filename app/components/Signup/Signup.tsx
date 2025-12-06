@@ -1,9 +1,9 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 export default function Signup() {
-  const FULL_NAME_MAX_LENGTH = 2;
+  const FULL_NAME_MIN_LENGTH = 2;
 
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,60 +11,54 @@ export default function Signup() {
   const [error, setError] = useState("");
 
   function validateFullName(fullName: string = "") {
-    setError("");
-
-    if (fullName.trim().length < FULL_NAME_MAX_LENGTH) {
-      setError(`Name must be at least ${FULL_NAME_MAX_LENGTH} characters.`);
+    if (fullName.trim().length < FULL_NAME_MIN_LENGTH) {
+      setError(`Name must be at least ${FULL_NAME_MIN_LENGTH} characters.`);
       return false;
     }
-
     return true;
   }
 
   function validateEmail(email: string = "") {
-    setError("");
-
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError("Please enter a valid email address.");
       return false;
     }
-
     return true;
   }
 
   function validatePassword(password: string = "") {
-    setError("");
-
     if (password.length < 6) {
       setError("Password must be at least 6 characters.");
       return false;
     }
-
     return true;
   }
 
+  const validateAll = () => {
+    if (!validateFullName(fullName)) return false;
+    if (!validateEmail(email)) return false;
+    if (!validatePassword(password)) return false;
+
+    setError("");
+    return true;
+  };
+
+  useEffect(() => {
+    validateAll(); // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fullName, email, password]);
+
   const handleFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFullName(e.target.value);
-    validateFullName(e.target.value);
   };
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    validateEmail(e.target.value);
   };
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
-    validatePassword(e.target.value);
   };
 
   const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-
-    if (!validateFullName()) return;
-    if (!validateEmail()) return;
-    if (!validatePassword()) return;
-
-    setError("");
-
     alert("Signup successful (demo)");
   };
 
