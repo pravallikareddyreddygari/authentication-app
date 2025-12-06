@@ -4,11 +4,12 @@ import { FormEvent, useEffect } from "react";
 import { setUserLoggedInStatus, users } from "../data/users";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import useValidation from "../hooks/useValidation";
 
-// import { getUserLoggedInStatus, users } from "../data/users";
-
 export default function Login() {
+  const router = useRouter();
+
   const {
     email,
     password,
@@ -41,7 +42,7 @@ export default function Login() {
     if (user) {
       alert("Login successful (demo)");
       setUserLoggedInStatus(true);
-      // Optionally redirect to dashboard or home
+      router.push("/");
     } else {
       setError("Invalid email or password");
     }

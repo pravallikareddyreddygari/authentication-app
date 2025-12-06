@@ -30,9 +30,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <main className="flex w-full flex-col items-center min-h-screen  justify-center font-sans">
-          <h1 className="text-3xl font-bold mb-4">
-            Welcome to the Authentication App!
-          </h1>
           {children}
         </main>
       </body>

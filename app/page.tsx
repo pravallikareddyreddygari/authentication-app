@@ -1,10 +1,16 @@
-import Signup from "./signup/page";
+"use client";
+
+import HomeComponent from "./component/HomeComponent";
 import { getUserLoggedInStatus } from "./data/users";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  if (!getUserLoggedInStatus()) return <Signup />;
+  const router = useRouter();
 
-  return (
-    <div className="flex-col flex items-center justify-center">Home page</div>
-  );
+  if (!getUserLoggedInStatus()) {
+    router.push("/login");
+    return null;
+  }
+
+  return <HomeComponent />;
 }
