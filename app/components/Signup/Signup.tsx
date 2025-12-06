@@ -2,34 +2,26 @@
 
 import { FormEvent, useEffect, useState } from "react";
 
+import useValidation from "../useValidation";
+
 export default function Signup() {
   const FULL_NAME_MIN_LENGTH = 2;
-
   const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
+  const {
+    email,
+    password,
+    validateEmail,
+    validatePassword,
+    error,
+    setError,
+    handleEmailChange,
+    handlePasswordChange,
+  } = useValidation();
 
   function validateFullName(fullName: string = "") {
     if (fullName.trim().length < FULL_NAME_MIN_LENGTH) {
       setError(`Name must be at least ${FULL_NAME_MIN_LENGTH} characters.`);
-      return false;
-    }
-    return true;
-  }
-
-  function validateEmail(email: string = "") {
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("Please enter a valid email address.");
-      return false;
-    }
-    return true;
-  }
-
-  function validatePassword(password: string = "") {
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters.");
       return false;
     }
     return true;
@@ -50,12 +42,6 @@ export default function Signup() {
 
   const handleFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFullName(e.target.value);
-  };
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
   };
 
   const onSubmit = (ev: FormEvent) => {
