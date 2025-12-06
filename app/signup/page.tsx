@@ -3,7 +3,9 @@
 import { FormEvent, useEffect, useState } from "react";
 
 import Link from "next/link";
+import { User } from "../types/user";
 import useValidation from "../hooks/useValidation";
+import { users } from "../data/users";
 
 export default function Signup() {
   const FULL_NAME_MIN_LENGTH = 2;
@@ -47,7 +49,25 @@ export default function Signup() {
 
   const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
+
+    const existingUser = users.find((u) => u.email === email);
+    if (existingUser) {
+      setError("User with this email already exists.");
+      return;
+    }
+
+    const newUser: User = {
+      id: users.length + 1,
+      name: fullName,
+      email: email,
+      password: password,
+    };
+
+    users.push(newUser);
     alert("Signup successful (demo)");
+
+
+    window.location.href = "/login";
   };
 
   return (
@@ -77,6 +97,7 @@ export default function Signup() {
         <input
           id="email"
           value={email}
+          autoComplete="off"
           onChange={handleEmailChange}
           // type="email"
           placeholder="you@example.com"
@@ -88,6 +109,7 @@ export default function Signup() {
           value={password}
           onChange={handlePasswordChange}
           type="password"
+          autoComplete="off"
           placeholder="At least 6 characters"
           className="w-full p-2 mb-4 border rounded-md"
         />

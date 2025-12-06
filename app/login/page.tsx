@@ -1,9 +1,12 @@
 "use client";
 
 import { FormEvent, useEffect } from "react";
+import { setUserLoggedInStatus, users } from "../data/users";
 
 import Link from "next/link";
 import useValidation from "../hooks/useValidation";
+
+// import { getUserLoggedInStatus, users } from "../data/users";
 
 export default function Login() {
   const {
@@ -31,7 +34,17 @@ export default function Login() {
 
   const onSubmit = (ev: FormEvent) => {
     ev.preventDefault();
-    alert("Login successful (demo)");
+
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
+    if (user) {
+      alert("Login successful (demo)");
+      setUserLoggedInStatus(true);
+      // Optionally redirect to dashboard or home
+    } else {
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -50,6 +63,7 @@ export default function Login() {
         <input
           id="email"
           value={email}
+          autoComplete="off"
           onChange={handleEmailChange}
           placeholder="you@example.com"
           className="w-full p-2 mb-4 border rounded-md"
@@ -58,6 +72,7 @@ export default function Login() {
         <label className="block mb-2 text-sm">Password</label>
         <input
           value={password}
+          autoComplete="off"
           onChange={handlePasswordChange}
           type="password"
           placeholder="At least 6 characters"
@@ -79,7 +94,7 @@ export default function Login() {
 
         <p className="text-sm mt-4 text-center">
           Don`t have an account?{" "}
-          <Link className="text-blue-600 underline" href="/">
+          <Link className="text-blue-600 underline" href="/signup">
             Sign up
           </Link>
         </p>
